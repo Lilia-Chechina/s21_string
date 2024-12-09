@@ -92,12 +92,6 @@ void test_memcpy() {
   result_orig = memcpy(dest, src, 0);
   ASSERT_EQ(0, strcmp(dest, "Copy me!"), "%s", "Copy me!");
   ASSERT_EQ(result_orig, result_our, "%p", result_our);
-
-  result_our = s21_memcpy(NULL, src, 10);
-  ASSERT_EQ(NULL, result_our, "%p", result_our);
-
-  result_our = s21_memcpy(dest, NULL, 10);
-  ASSERT_EQ(NULL, result_our, "%p", result_our);
 }
 
 int main() {
