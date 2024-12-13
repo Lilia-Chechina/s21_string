@@ -965,9 +965,10 @@ int s21_sprintf(char *str, const char *format, ...) {
                 i++;
             } else if (!is_int(format[i])) {
                 int size = 0;
-                char *char_int = malloc(sizeof(char) * size);
+                char *char_int_1 = malloc(sizeof(char) * size);
+                char *char_int = s21_NULL;
                 while (!is_int(format[i])) {
-                    char_int = realloc(char_int, sizeof(char) * (++size));
+                    char_int = realloc(char_int_1, sizeof(char) * (++size));
                     char_int[size - 1] = format[i];
                     i++;
                 }
@@ -986,9 +987,10 @@ int s21_sprintf(char *str, const char *format, ...) {
                 } else if (!is_int(format[i])) {
                     accuracy_flag = 1;
                     int size = 0;
-                    char *char_int = malloc(sizeof(char) * size);
+                    char *char_int_1 = malloc(sizeof(char) * size);
+                    char *char_int = NULL;
                     while (!is_int(format[i])) {
-                        char_int = realloc(char_int, sizeof(char) * (++size));
+                        char_int = realloc(char_int_1, sizeof(char) * (++size));
                         char_int[size - 1] = format[i];
                         i++;
                     }
@@ -1007,3 +1009,5 @@ int s21_sprintf(char *str, const char *format, ...) {
     va_end(arg);
     return count;
 }
+
+//5
