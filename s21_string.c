@@ -1,13 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <stddef.h>
 #include <math.h>
 #include "s21_string.h"
-
-#define s21_NULL ((void*)0)
-
-typedef unsigned long s21_size_t;
 
 //1-3
 void *s21_memchr(const void *str, int c, s21_size_t n) {

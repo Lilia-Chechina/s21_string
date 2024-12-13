@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-12-14 00:00:55</td>
+            <td class="headerValue">2024-12-14 00:38:57</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -258,7 +258,7 @@
 <a name="196"><span class="lineNum">     196 </span>            : </a>
 <a name="197"><span class="lineNum">     197 </span><span class="lineCov">          1 : int main(void) {</span></a>
 <a name="198"><span class="lineNum">     198 </span>            :     char buff[1024];</a>
-<a name="199"><span class="lineNum">     199 </span><span class="lineCov">          1 :     char *format = &quot;%34.32u|%-.10lf|%36.34ld&quot;;</span></a>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">          1 :     char *format = &quot;%34.32u|%-.9lf|%36.34ld&quot;;</span></a>
 <a name="200"><span class="lineNum">     200 </span><span class="lineCov">          1 :     int len = s21_sprintf(buff, format, -42, 400.3, 10000000000000);</span></a>
 <a name="201"><span class="lineNum">     201 </span><span class="lineCov">          1 :     printf(&quot;|%s, %d|\n&quot;, buff, len);</span></a>
 <a name="202"><span class="lineNum">     202 </span><span class="lineCov">          1 :     len = sprintf(buff, format, -42, 400.3, 10000000000000);</span></a>
