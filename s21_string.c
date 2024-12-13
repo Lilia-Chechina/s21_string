@@ -971,11 +971,13 @@ int s21_sprintf(char *str, const char *format, ...) {
                     char_int = realloc(char_int_1, sizeof(char) * (++size));
                     char_int[size - 1] = format[i];
                     i++;
+                    char_int_1 = char_int;
                 }
                 for (int x = 0; x < size; x++) {
                     length += (pow(10, size - x - 1)) * (char_int[x] - 48);
                 }
                 free(char_int);
+                char_int = NULL;
             }
             //проверка точности
             if (format[i] == '.') {
@@ -988,16 +990,18 @@ int s21_sprintf(char *str, const char *format, ...) {
                     accuracy_flag = 1;
                     int size = 0;
                     char *char_int_1 = malloc(sizeof(char) * size);
-                    char *char_int = NULL;
+                    char *char_int = s21_NULL;
                     while (!is_int(format[i])) {
                         char_int = realloc(char_int_1, sizeof(char) * (++size));
                         char_int[size - 1] = format[i];
                         i++;
+                        char_int_1 = char_int;
                     }
                     for (int x = 0; x < size; x++) {
                         accuracy += (pow(10, size - x - 1)) * (char_int[x] - 48);
                     }
                     free(char_int);
+                    char_int = NULL;
                 }
             }
             spech(str, &count, &i, format[i], format[i + 1], format[i + 2], &arg, length, accuracy_flag, accuracy, plus_flag, null_flag);
