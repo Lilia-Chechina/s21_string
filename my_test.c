@@ -1,29 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
-char* to_lower(const char *str) {
-    int len = 0;
-    for (int i = 0; str[i] != '\0'; i++) {
-        len++;
+void float_in_str(float val, int *length, int plus_flag, int accuracy, int null_flag) {
+    int N = (int)val;
+    float R = val - N;
+    while (R != (int)R) {
+        R *= 10;
     }
-    char res[len];
-    char *point = res;
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] > 'A' && str[i] < 'Z') {
-            res[i] = str[i] + 32;
-        } else {
-            res[i] = str[i];
-        }
-    }
-    res[len] = '\0';
-    return point;
+    int N_R = (int)R;
+    printf("%d %d\n%f %f\n", N, N_R, R, val);
 }
 
 int main() {
-
-    char my_str[1024] = "LoX PiDr1235 45846";
-    char *my_new_str = to_lower(my_str);
-    printf("\n%s\n\n", my_new_str);
-    free(my_str);
+    float val = 11233.512;
+    int length = 5;
+    int plus_flag = 1;
+    int accuracy = 2;
+    int null_flag = 0;
+    float_in_str(val, &length, plus_flag, accuracy, null_flag);
+    //printf("|%s|\n", float_in_str(val, &length, plus_flag, accuracy, null_flag));
+    printf("|%f|\n", val);
+    //printf("%d", length);
     return 0;
 }
