@@ -196,10 +196,10 @@ Suite *strtok_suite(void) {
 
 int main(void) {
     char buff[1024];
-    char *format = "%34.32u|%-.2d|%36.34ld";
-    int len = s21_sprintf(buff, format, -42, 400, 10000000000000);
+    char *format = "%34.32u|%-.9lf|%36.34ld";
+    int len = s21_sprintf(buff, format, -42, 400.3, 10000000000000);
     printf("|%s, %d|\n", buff, len);
-    len = sprintf(buff, format, -42, 400, 10000000000000);
+    len = sprintf(buff, format, -42, 400.3, 10000000000000);
     printf("|%s, %d|\n", buff, len);
     /*
     int number_failed;
