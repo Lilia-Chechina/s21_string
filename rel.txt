@@ -23,3 +23,17 @@ long float
 long int
 long double
 short int
+
+%c - char
+%d - int//
+%s - str
+%f - float
+%u - unsigned int//
+%hd - short int//
+%hu - unsigned short int//
+%ld - long int//
+%lf - double
+%lu - unsigned long int//
+%lld - long long int//
+%llf - long double
+%llu - unsigned long long int//

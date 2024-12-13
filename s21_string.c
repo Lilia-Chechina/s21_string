@@ -106,8 +106,8 @@ int s21_strncmp(const char *str1, const char *str2, size_t n) {
     return (*(unsigned char *)str1 - (*(unsigned char *)str2));
 }
 
-size_t s21_strcspn(const char *str1, const char *str2) {
-  size_t size = 0;
+s21_size_t s21_strcspn(const char *str1, const char *str2) {
+  s21_size_t size = 0;
   while (!s21_strchr(str2, *str1) && *str1 != '\0') {
     str1++;
     size++;
@@ -405,6 +405,118 @@ char *long_int_in_str(long int val, int *length, int plus_flag, int null_flag, i
     return res;
 }
 
+char *short_int_in_str(short int val, int *length, int plus_flag, int null_flag, int accuracy_flag, int accuracy) {
+    int len = 0;
+    short int res_val = val;
+    if (val == 0) len = 1;
+    else {
+        if (res_val < 0) res_val = -res_val;
+        len = (short int)(log10(res_val)) + 1;
+    }
+    int size = len;
+    int count = 0;
+    int cura = 0;
+    if (val < 0) len++;
+    if (len > (*length)) (*length) = len;
+    if (accuracy > len && accuracy > (*length)) (*length) = accuracy;
+    char *res = malloc(sizeof(char) * (*length));
+    char point = ' ';
+    if (null_flag == 1 && accuracy_flag == 0) point = '0';
+    for (int i = 0; i < (*length); i++) {
+        res[i] = point;
+    }
+    if (plus_flag == 1) {
+        if (val < 0) {
+            res[(*length) - len] = '-';
+            count = (*length) - len + 1;
+        } else count = (*length) - len;
+        for (int i = count - accuracy + len; i < count; i++) {
+            res[i] = '0';
+        }
+
+        for (int i = count; i < (*length); i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    } else {
+        if (val < 0) {
+            count = 1;
+            res[0] = '-';
+        }
+        int res_size = size;
+        for (int i = count; i < accuracy - len; i++) {
+            res[i] = '0';
+            count++;
+        }
+        for (int i = count; i < res_size + count; i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    }
+
+    return res;
+}
+
+char *long_long_int_in_str(long long int val, int *length, int plus_flag, int null_flag, int accuracy_flag, int accuracy) {
+    int len = 0;
+    long long int res_val = val;
+    if (val == 0) len = 1;
+    else {
+        if (res_val < 0) res_val = -res_val;
+        len = (long long int)(log10(res_val)) + 1;
+    }
+    int size = len;
+    int count = 0;
+    int cura = 0;
+    if (val < 0) len++;
+    if (len > (*length)) (*length) = len;
+    if (accuracy > len && accuracy > (*length)) (*length) = accuracy;
+    char *res = malloc(sizeof(char) * (*length));
+    char point = ' ';
+    if (null_flag == 1 && accuracy_flag == 0) point = '0';
+    for (int i = 0; i < (*length); i++) {
+        res[i] = point;
+    }
+    if (plus_flag == 1) {
+        if (val < 0) {
+            res[(*length) - len] = '-';
+            count = (*length) - len + 1;
+        } else count = (*length) - len;
+        for (int i = count - accuracy + len; i < count; i++) {
+            res[i] = '0';
+        }
+
+        for (int i = count; i < (*length); i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    } else {
+        if (val < 0) {
+            count = 1;
+            res[0] = '-';
+        }
+        int res_size = size;
+        for (int i = count; i < accuracy - len; i++) {
+            res[i] = '0';
+            count++;
+        }
+        for (int i = count; i < res_size + count; i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    }
+
+    return res;
+}
+
 char *unsigned_int_in_str(unsigned int val, int *length, int plus_flag, int null_flag, int accuracy_flag, int accuracy) {
     int len = 0;
     long int res_val = val;
@@ -454,7 +566,193 @@ char *unsigned_int_in_str(unsigned int val, int *length, int plus_flag, int null
     return res;
 }
 
-void spech(char *str, int *count, int *i, char format_1, char format_2, va_list *arg, int length_flag, int length, int accuracy_flag, int accuracy, int plus_flag, int null_flag) {
+char *unsigned_short_int_in_str(unsigned short int val, int *length, int plus_flag, int null_flag, int accuracy_flag, int accuracy) {
+    int len = 0;
+    long int res_val = val;
+    if (val == 0) len = 1;
+    else {
+        if (res_val < 0) res_val = -res_val;
+        len = (unsigned short int)(log10(res_val)) + 1;
+    }
+    int size = len;
+    int count = 0;
+    int cura = 0;
+    
+    if (len > (*length)) (*length) = len;
+    if (accuracy > len && accuracy > (*length)) (*length) = accuracy;
+    char *res = malloc(sizeof(char) * (*length));
+    char point = ' ';
+    if (null_flag == 1 && accuracy_flag == 0) point = '0';
+    for (int i = 0; i < (*length); i++) {
+        res[i] = point;
+    }
+    if (plus_flag == 1) {
+        count = (*length) - len;
+        for (int i = count - accuracy + len; i < count; i++) {
+            res[i] = '0';
+        }
+
+        for (int i = count; i < (*length); i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    } else {
+        int res_size = size;
+        for (int i = count; i < accuracy - len; i++) {
+            res[i] = '0';
+            count++;
+        }
+        for (int i = count; i < res_size + count; i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    }
+
+    return res;
+}
+
+char *unsigned_long_int_in_str(unsigned long int val, int *length, int plus_flag, int null_flag, int accuracy_flag, int accuracy) {
+    int len = 0;
+    long int res_val = val;
+    if (val == 0) len = 1;
+    else {
+        if (res_val < 0) res_val = -res_val;
+        len = (unsigned long int)(log10(res_val)) + 1;
+    }
+    int size = len;
+    int count = 0;
+    int cura = 0;
+    
+    if (len > (*length)) (*length) = len;
+    if (accuracy > len && accuracy > (*length)) (*length) = accuracy;
+    char *res = malloc(sizeof(char) * (*length));
+    char point = ' ';
+    if (null_flag == 1 && accuracy_flag == 0) point = '0';
+    for (int i = 0; i < (*length); i++) {
+        res[i] = point;
+    }
+    if (plus_flag == 1) {
+        count = (*length) - len;
+        for (int i = count - accuracy + len; i < count; i++) {
+            res[i] = '0';
+        }
+
+        for (int i = count; i < (*length); i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    } else {
+        int res_size = size;
+        for (int i = count; i < accuracy - len; i++) {
+            res[i] = '0';
+            count++;
+        }
+        for (int i = count; i < res_size + count; i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    }
+
+    return res;
+}
+
+char *unsigned_long_long_int_in_str(unsigned long long int val, int *length, int plus_flag, int null_flag, int accuracy_flag, int accuracy) {
+    int len = 0;
+    long int res_val = val;
+    if (val == 0) len = 1;
+    else {
+        if (res_val < 0) res_val = -res_val;
+        len = (unsigned long long int)(log10(res_val)) + 1;
+    }
+    int size = len;
+    int count = 0;
+    int cura = 0;
+    
+    if (len > (*length)) (*length) = len;
+    if (accuracy > len && accuracy > (*length)) (*length) = accuracy;
+    char *res = malloc(sizeof(char) * (*length));
+    char point = ' ';
+    if (null_flag == 1 && accuracy_flag == 0) point = '0';
+    for (int i = 0; i < (*length); i++) {
+        res[i] = point;
+    }
+    if (plus_flag == 1) {
+        count = (*length) - len;
+        for (int i = count - accuracy + len; i < count; i++) {
+            res[i] = '0';
+        }
+
+        for (int i = count; i < (*length); i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    } else {
+        int res_size = size;
+        for (int i = count; i < accuracy - len; i++) {
+            res[i] = '0';
+            count++;
+        }
+        for (int i = count; i < res_size + count; i++) {
+            cura = (int)(res_val / pow(10, size - 1)) + 48;
+            res[i] = cura;
+            res_val = res_val - pow(10, size - 1) * (cura - 48);
+            size--;
+        }
+    }
+
+    return res;
+}
+
+char *char_in_str(char val, int *length, int plus_flag) {
+    if ((*length) < 1) (*length) = 1;
+    char *res = malloc(sizeof(char) * (*length));
+    for (int i = 0; i < (*length); i++) {
+        res[i] = ' ';
+    }
+    if (plus_flag == 1) {
+        res[(*length) - 1] = val;
+    } else {
+        res[0] = val;
+    }
+    return res;
+}
+
+char *str_in_str(char *val, int *length, int plus_flag, int accuracy) {
+    int len = 0;
+    while(1) {
+        if (val[len] == '\0' || len >= accuracy) break;
+        len++;
+    }
+    if (len > (*length)) (*length) = len;
+    char *res = malloc(sizeof(char) * (*length));
+    for (int i = 0; i < (*length); i++) {
+        res[i] = ' ';
+    }
+    if (plus_flag == 1) {
+        int count = 0;
+        for (int i = (*length) - len; i < (*length); i++) {
+            res[i] = val[count];
+            count++;
+        }
+    } else {
+        for (int i = 0; i < len; i++) {
+            res[i] = val[i];
+        }
+    }
+    return res;
+}
+
+void spech(char *str, int *count, int *i, char format_1, char format_2, char format_3, va_list *arg, int length_flag, int length, int accuracy_flag, int accuracy, int plus_flag, int null_flag) {
     char *res = NULL;
     if (format_1 == 'd') {
         int val = va_arg(*arg, int);
@@ -467,17 +765,52 @@ void spech(char *str, int *count, int *i, char format_1, char format_2, va_list 
         if (length_flag) length = va_arg(*arg, int);
         if (accuracy_flag) accuracy = va_arg(*arg, int);
         res = long_int_in_str(val, &length, plus_flag, null_flag, accuracy_flag, accuracy);
+    } else if (format_1 == 'h' && format_2 == 'd') {
+        (*i)++;
+        short int val = va_arg(*arg, int);
+        if (length_flag) length = va_arg(*arg, int);
+        if (accuracy_flag) accuracy = va_arg(*arg, int);
+        res = short_int_in_str(val, &length, plus_flag, null_flag, accuracy_flag, accuracy);
+    } else if (format_1 == 'l' && format_2 == 'l' && format_3 == 'd') {
+        (*i) += 2;
+        long long int val = va_arg(*arg, long long int);
+        if (length_flag) length = va_arg(*arg, int);
+        if (accuracy_flag) accuracy = va_arg(*arg, int);
+        res = long_int_in_str(val, &length, plus_flag, null_flag, accuracy_flag, accuracy);
     } else if (format_1 == 'u') {
         unsigned int val = va_arg(*arg, unsigned int);
         if (length_flag) length = va_arg(*arg, int);
         if (accuracy_flag) accuracy = va_arg(*arg, int);
         res = unsigned_int_in_str(val, &length, plus_flag, null_flag, accuracy_flag, accuracy);
-    }/* else if (format_1 == 'c') {
-        char val = va_arg(*arg, char);
+    } else if (format_1 == 'l' && format_2 == 'u') {
+        (*i)++;
+        unsigned long int val = va_arg(*arg, unsigned long int);
         if (length_flag) length = va_arg(*arg, int);
         if (accuracy_flag) accuracy = va_arg(*arg, int);
-        res = char_in_str(val, length, plus_flag, null_flag);
-    } else if (format_1 == 'f') {
+        res = unsigned_long_int_in_str(val, &length, plus_flag, null_flag, accuracy_flag, accuracy);
+    } else if (format_1 == 'h' && format_2 == 'u') {
+        (*i)++;
+        unsigned short int val = va_arg(*arg, int);
+        if (length_flag) length = va_arg(*arg, int);
+        if (accuracy_flag) accuracy = va_arg(*arg, int);
+        res = unsigned_short_int_in_str(val, &length, plus_flag, null_flag, accuracy_flag, accuracy);
+    } else if (format_1 == 'l' && format_2 == 'l' && format_3 == 'u') {
+        (*i) += 2;
+        unsigned long long int val = va_arg(*arg, unsigned long long int);
+        if (length_flag) length = va_arg(*arg, int);
+        if (accuracy_flag) accuracy = va_arg(*arg, int);
+        res = unsigned_long_long_int_in_str(val, &length, plus_flag, null_flag, accuracy_flag, accuracy);
+    } else if (format_1 == 'c') {
+        char val = va_arg(*arg, int);
+        if (length_flag) length = va_arg(*arg, int);
+        if (accuracy_flag) accuracy = va_arg(*arg, int);
+        res = char_in_str(val, &length, plus_flag);
+    } else if (format_1 == 's') {
+        char *val = va_arg(*arg, char*);
+        if (length_flag) length = va_arg(*arg, int);
+        if (accuracy_flag) accuracy = va_arg(*arg, int);
+        res = str_in_str(val, &length, plus_flag, accuracy);
+    } /*else if (format_1 == 'f') {
         float val = va_arg(*arg, float);
         if (length_flag) length = va_arg(*arg, int);
         if (accuracy_flag) accuracy = va_arg(*arg, int);
@@ -488,13 +821,13 @@ void spech(char *str, int *count, int *i, char format_1, char format_2, va_list 
         if (length_flag) length = va_arg(*arg, int);
         if (accuracy_flag) accuracy = va_arg(*arg, int);
         res = double_in_str(val, length, plus_flag, null_flag);
-    } else if (format_1 == 's') {
-        char *val = va_arg(*arg, char*);
+    } else if (format_1 == 'l', format_2 == 'l' && format == 'f') {
+        (*i) += 2;
+        double val = va_arg(*arg, double);
         if (length_flag) length = va_arg(*arg, int);
         if (accuracy_flag) accuracy = va_arg(*arg, int);
-        res = str_in_str(val, length, plus_flag, null_flag);
-    }
-    */
+        res = double_in_str(val, length, plus_flag, null_flag);
+    }*/
     if (res != NULL) {
         for (int x = 0; x < length; x++) {
             str[(*count)++] = res[x];
@@ -564,7 +897,7 @@ int s21_sprintf(char *str, const char *format, ...) {
                     free(char_int);
                 }
             }
-            spech(str, &count, &i, format[i], format[i+1], &arg, length_flag, length, accuracy_flag, accuracy, plus_flag, null_flag);
+            spech(str, &count, &i, format[i], format[i + 1], format[i + 2], &arg, length_flag, length, accuracy_flag, accuracy, plus_flag, null_flag);
         } else {
             str[count++] = format[i];
         }
