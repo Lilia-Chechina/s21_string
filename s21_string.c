@@ -350,7 +350,7 @@ char *long_int_in_str(long int val, int *length, int plus_flag, int null_flag, i
     if (val == 0) len = 1;
     else {
         if (res_val < 0) res_val = -res_val;
-        len = (long int)(log10(res_val)) + 1;
+        len = (int)(log10(res_val)) + 1;
     }
     int size = len;
     int count = 0;
@@ -406,7 +406,7 @@ char *short_int_in_str(short int val, int *length, int plus_flag, int null_flag,
     if (val == 0) len = 1;
     else {
         if (res_val < 0) res_val = -res_val;
-        len = (short int)(log10(res_val)) + 1;
+        len = (int)(log10(res_val)) + 1;
     }
     int size = len;
     int count = 0;
@@ -462,7 +462,7 @@ char *long_long_int_in_str(long long int val, int *length, int plus_flag, int nu
     if (val == 0) len = 1;
     else {
         if (res_val < 0) res_val = -res_val;
-        len = (long long int)(log10(res_val)) + 1;
+        len = (int)(log10(res_val)) + 1;
     }
     int size = len;
     int count = 0;
@@ -518,7 +518,7 @@ char *unsigned_int_in_str(unsigned int val, int *length, int plus_flag, int null
     if (val == 0) len = 1;
     else {
         if (res_val < 0) res_val = -res_val;
-        len = (unsigned int)(log10(res_val)) + 1;
+        len = (int)(log10(res_val)) + 1;
     }
     int size = len;
     int count = 0;
@@ -567,7 +567,7 @@ char *unsigned_short_int_in_str(unsigned short int val, int *length, int plus_fl
     if (val == 0) len = 1;
     else {
         if (res_val < 0) res_val = -res_val;
-        len = (unsigned short int)(log10(res_val)) + 1;
+        len = (int)(log10(res_val)) + 1;
     }
     int size = len;
     int count = 0;
@@ -616,7 +616,7 @@ char *unsigned_long_int_in_str(unsigned long int val, int *length, int plus_flag
     if (val == 0) len = 1;
     else {
         if (res_val < 0) res_val = -res_val;
-        len = (unsigned long int)(log10(res_val)) + 1;
+        len = (int)(log10(res_val)) + 1;
     }
     int size = len;
     int count = 0;
@@ -665,7 +665,7 @@ char *unsigned_long_long_int_in_str(unsigned long long int val, int *length, int
     if (val == 0) len = 1;
     else {
         if (res_val < 0) res_val = -res_val;
-        len = (unsigned long long int)(log10(res_val)) + 1;
+        len = (int)(log10(res_val)) + 1;
     }
     int size = len;
     int count = 0;
@@ -722,10 +722,10 @@ char *char_in_str(char val, int *length, int plus_flag) {
     return res;
 }
 
-char *str_in_str(char *val, int *length, int plus_flag, int accuracy) {
+char *str_in_str(char *val, int *length, int plus_flag, int accuracy, int accuracy_flag) {
     int len = 0;
     while(1) {
-        if (val[len] == '\0' || len >= accuracy) break;
+        if (val[len] == '\0' || (len >= accuracy && accuracy_flag == 1)) break;
         len++;
     }
     if (len > (*length)) (*length) = len;
@@ -756,7 +756,7 @@ char *float_in_str(float val, int *length, int plus_flag, int accuracy, int null
     int R = rint(((val - (int)val) * pow (10, pointer + 1)) / 10);
     int len_1 = 0;
     if (N == 0) len_1 = 1;
-    else len_1 = log10(N) + 1;
+    else len_1 = (int)log10(N) + 1;
     int len_2 = pointer;
     int len = len_1 + len_2;
     int size = len_1;
@@ -821,7 +821,7 @@ char *double_in_str(double val, int *length, int plus_flag, int accuracy, int nu
     int R = rint(((val - (int)val) * pow (10, pointer + 1)) / 10);
     int len_1 = 0;
     if (N == 0) len_1 = 1;
-    else len_1 = log10(N) + 1;
+    else len_1 = (int)log10(N) + 1;
     int len_2 = pointer;
     int len = len_1 + len_2;
     int size = len_1;
@@ -914,7 +914,7 @@ void spech(char *str, int *count, int *i, char format_1, char format_2, char for
         res = char_in_str(val, &length, plus_flag);
     } else if (format_1 == 's') {
         char *val = va_arg(*arg, char*);
-        res = str_in_str(val, &length, plus_flag, accuracy);
+        res = str_in_str(val, &length, plus_flag, accuracy, accuracy_flag);
     } else if (format_1 == 'f') {
         float val = va_arg(*arg, double);
         res = float_in_str(val, &length, plus_flag, accuracy, null_flag, accuracy_flag);

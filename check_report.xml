@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="http://check.sourceforge.net/xml/check_unittest.xslt"?>
+<testsuites xmlns="http://check.sourceforge.net/ns">
+  <datetime>2024-12-14 09:47:16</datetime>
+  <suite>
+    <title>s21_sprintf</title>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:14</fn>
+      <id>test_integer_format</id>
+      <iteration>0</iteration>
+      <duration>0.000018</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:22</fn>
+      <id>test_float_format</id>
+      <iteration>0</iteration>
+      <duration>0.000014</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:30</fn>
+      <id>test_string_format</id>
+      <iteration>0</iteration>
+      <duration>0.000007</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:38</fn>
+      <id>test_char_format</id>
+      <iteration>0</iteration>
+      <duration>0.000007</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:46</fn>
+      <id>test_multiple_arguments</id>
+      <iteration>0</iteration>
+      <duration>0.000014</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:54</fn>
+      <id>test_width_modifier</id>
+      <iteration>0</iteration>
+      <duration>0.000015</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:62</fn>
+      <id>test_precision_modifier</id>
+      <iteration>0</iteration>
+      <duration>0.000014</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:70</fn>
+      <id>test_left_justified</id>
+      <iteration>0</iteration>
+      <duration>0.000014</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+    <test result="success">
+      <path>.</path>
+      <fn>test.c:78</fn>
+      <id>test_empty_format_string</id>
+      <iteration>0</iteration>
+      <duration>0.000007</duration>
+      <description>Core</description>
+      <message>Passed</message>
+    </test>
+  </suite>
+  <duration>0.002147</duration>
+</testsuites>
