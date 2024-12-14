@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <string.h>
 
 int main() {
-    char buffer[50];
-    int result = s21_sprintf(buffer, "%d %s", 12345, "Hello");
+    char str1[] = "Hello";
+    char str3[] = "Hellx";
+    int result = memcmp(str1, str3, 4);
     printf("%d", result);
 
     return 0;

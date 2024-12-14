@@ -71,25 +71,17 @@ char *s21_strncat(char *dest, const char *src, s21_size_t n) {
 }
 
 char *s21_strchr(const char *str, int c) {
-    char *result = s21_NULL; 
-    for (int i = 0; str[i] != '\0'; i++) {
-        if ((unsigned char)str[i] == (unsigned char)c) {  // случай если символ совпадает с искомым
-            result = (char *)&str[i];
-            break; 
+    while (*str != '\0') {
+        if (*str == (char)c) {
+            return (char *)str;
         }
+        str++;
     }
-
-    if (result == NULL && c == '\0') {  // ищем символ конца строки '\0' и он не был найден ранее
-        result = (char *)&str[0];
-        while (*result != '\0') { // нашли указатель на конец строки
-            result++;
-        }
-    }
-    return result;
+    return (c == '\0') ? (char *)str : s21_NULL;
 }
 
-//7, 9
-int s21_strncmp(const char *str1, const char *str2, size_t n) {
+//7-9
+int s21_strncmp(const char *str1, const char *str2, s21_size_t n) {
   for (; n > 0; n--, str1++, str2++) {
     if (*str1 != *str2) {
       break;
@@ -99,6 +91,17 @@ int s21_strncmp(const char *str1, const char *str2, size_t n) {
     return 0;
   else
     return (*(unsigned char *)str1 - (*(unsigned char *)str2));
+}
+
+char *s21_strncpy(char *dest, const char *src, s21_size_t n) {
+    s21_size_t i;
+    for (i = 0; i < n && src[i] != '\0'; i++) {
+        dest[i] = src[i];
+    }
+    for (; i < n; i++) {
+        dest[i] = '\0';
+    }
+    return dest;
 }
 
 s21_size_t s21_strcspn(const char *str1, const char *str2) {
